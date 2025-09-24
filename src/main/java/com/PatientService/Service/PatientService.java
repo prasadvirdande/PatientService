@@ -25,17 +25,22 @@ public class PatientService {
         return patientRepository.findAll().stream().map(patient -> PatientMapper.mapToPatientResponseDTO(patient)).collect(Collectors.toList());
     }
 
-    public PatientRequestDTO createPatient(PatientRequestDTO patientRequestDTO) {
+    public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO) {
+        if(patientRepository.existsByEmail(patientRequestDTO.getEmail())){
+            throw new RuntimeException("Email already exits");
+        }
         Patient patient= PatientMapper.toPatient(patientRequestDTO);
         patient.setRegisteredDate(LocalDate.now());
-        patientRepository.save(patient);
-        return patientRequestDTO;
+        Patient savedPatient=patientRepository.save(patient);
+        return PatientMapper.mapToPatientResponseDTO(savedPatient);
+
     }
-    public PatientRequestDTO updatePatient(PatientRequestDTO patientRequestDTO) {
-        Patient patient= PatientMapper.toPatient(patientRequestDTO);
-        patientRepository.save(patient);
-        return patientRequestDTO;
+    public PatientResponseDTO updatePatient(PatientRequestDTO patientRequestDTO) {
+        Patient patient = PatientMapper.toPatient(patientRequestDTO);
+        Patient updatedPatient = patientRepository.save(patient);
+        return PatientMapper.mapToPatientResponseDTO(updatedPatient);
     }
+
     public void deletePatient(UUID id) {
         patientRepository.deleteById(id);
     }

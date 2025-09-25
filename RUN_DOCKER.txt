@@ -1,0 +1,16 @@
+# How to Build and Run PatientService with Docker
+
+1. Build the JAR file in your project directory. This will generate the JAR file at target/PatientService-0.0.1-SNAPSHOT.jar.
+
+2. Build the Docker image in the same directory as your Dockerfile. This will create a Docker image named patientservice.
+
+3. Run the Docker container. This maps port 8080 of the container to port 8080 on your host machine.
+
+4. Access your application by opening your browser and going to http://localhost:8080. Your Spring Boot application should now be running and accessible.
+
+Notes:
+- If you make changes to your code, rebuild the JAR and Docker image before running again.
+- The src directory is copied into the image for reference; only the JAR is executed.
+- For troubleshooting, check the container logs.
+
+If you need further help, let me know!

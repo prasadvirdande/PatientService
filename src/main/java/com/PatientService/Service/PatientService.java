@@ -6,9 +6,7 @@ package com.PatientService.Service;
  import com.PatientService.Mapper.PatientMapper;
  import com.PatientService.Repository.PatientRepository;
  import org.springframework.stereotype.Service;
-
  import java.time.LocalDate;
- import java.time.LocalDateTime;
  import java.util.List;
  import java.util.UUID;
  import java.util.stream.Collectors;

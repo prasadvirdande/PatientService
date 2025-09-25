@@ -1,13 +1,26 @@
--- Ensure the 'patient' table exists
+-- Enable pgcrypto extension for UUID generation (PostgreSQL)
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+-- PostgreSQL patient table
 CREATE TABLE IF NOT EXISTS patient
 (
-    id              UUID PRIMARY KEY,
-    name            VARCHAR(255)        NOT NULL,
-    email           VARCHAR(255) UNIQUE NOT NULL,
-    address         VARCHAR(255)        NOT NULL,
-    date_of_birth   DATE                NOT NULL,
-    registered_date DATE                NOT NULL
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    registered_date DATE NOT NULL
 );
+
+-- H2 database version (commented)
+-- CREATE TABLE IF NOT EXISTS patient (
+--     id UUID PRIMARY KEY,
+--     name VARCHAR(255) NOT NULL,
+--     email VARCHAR(255) UNIQUE NOT NULL,
+--     address VARCHAR(255) NOT NULL,
+--     date_of_birth DATE NOT NULL,
+--     registered_date DATE NOT NULL
+-- );
 
 -- Insert well-known UUIDs for specific patients
 INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)

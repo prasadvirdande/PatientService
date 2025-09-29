@@ -44,5 +44,11 @@ public class PatientService {
     }
 
 
+    public PatientResponseDTO getPatientById(UUID id) {
+            return patientRepository.findById(id)
+                    .map(PatientMapper::mapToPatientResponseDTO)
+                    .orElseThrow(() ->
+                            new RuntimeException("Patient not found"));
+        }
+    }
 
-}
